@@ -11,8 +11,11 @@ func main() {
 
 	fmt.Println("Depois da função escrever / começar a ser executada")
 
-	mensagem := <-canal
-	fmt.Println(mensagem)
+	for mensagem := range canal {
+		fmt.Println(mensagem)
+	}
+
+	fmt.Println("Fim do programa!")
 
 }
 
@@ -22,4 +25,5 @@ func escrever(texto string, canal chan string) {
 		canal <- texto
 		time.Sleep(time.Second)
 	}
+	close(canal)
 }
